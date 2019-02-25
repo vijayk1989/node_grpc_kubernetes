@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodegrpc
+  labels:
+    app: nodegrpc
+spec:
+  selector:
+    matchLabels:
+      app: nodegrpc
+  template:
+    metadata:
+      labels:
+        app: nodegrpc
+    spec:
+      containers:
+        - name: nodegrpc
+          image: vijaykumarbhattacharji/simplenodegrpc
+          ports:
+            - containerPort: 50051
+          env:
+            - name: PGUSER
+              value: postgres
+            - name: PGHOST
+              value: postgres-cluster-ip-service
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: postgres
+            - name: PGPASSWORD
+              value: password
